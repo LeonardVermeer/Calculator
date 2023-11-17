@@ -213,9 +213,9 @@
             // 
             // btnEqual
             // 
-            this.btnEqual.Location = new System.Drawing.Point(269, 245);
+            this.btnEqual.Location = new System.Drawing.Point(13, 245);
             this.btnEqual.Name = "btnEqual";
-            this.btnEqual.Size = new System.Drawing.Size(33, 26);
+            this.btnEqual.Size = new System.Drawing.Size(288, 26);
             this.btnEqual.TabIndex = 18;
             this.btnEqual.Text = "=";
             this.btnEqual.UseVisualStyleBackColor = true;

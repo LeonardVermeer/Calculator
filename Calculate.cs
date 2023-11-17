@@ -31,14 +31,18 @@ namespace Calculator {
         }
 
         public string Calculation() {
-            InsertNumberIntoEquation();
+            InsertNumberIntoEquation(); //Add in the last number
+            //I have to use loops and call functions
+            //"In C#, when a function calls another function,
+            //and that second function calls the original function,
+            //it creates a new instance of the stack frame for each function call.
+            //Each stack frame maintains its own set of local variables, including parameters,
+            //and has its own execution context."
 
-            //loop through uneaven indexes and if a / or a x is found, calculate
-            //then loop through uneaven indexes and calculate
+            //PEDMAS
+            //One funciton for each of them
 
-            //Start at an operator index 0 will always be a number
-            for (int i = 1; i <= equation.Count - 1; i+= 2) { //equation.Count - 1 because the last one will always be a number
-            //All symbols will be in uneaven indexes
+            for (int i = 1; i <= equation.Count - 1; i++) { //equation.Count - 1 because the last one will always be a number
                 if (equation[i] == "/") {
                     float.TryParse(equation[i - 1], out float num1);
                     float.TryParse(equation[i + 1], out float num2);
