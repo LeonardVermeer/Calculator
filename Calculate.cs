@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Calculator {
     internal class Calculate {
-        List <String> numbers = new List <String> ();
+        List <String> numbers = new List <String> (); //Can't this just be a string?
         List <String> equation = new List <String> ();
 
         public void InsertNumber(char Num) {
@@ -27,6 +27,7 @@ namespace Calculator {
             }
     
             equation.Add(number);
+            numbers = new List<string>();
         }
 
         public void InsertOperator(string Operator) {
@@ -37,12 +38,9 @@ namespace Calculator {
             }
 
             equation.Add(Operator);
-
-            numbers = new List<string> ();
         }
 
         public string Calculation() {
-            InsertNumberIntoEquation(); //Add in the last number
             //I have to use loops and call functions
             //"In C#, when a function calls another function,
             //and that second function calls the original function,
@@ -51,7 +49,7 @@ namespace Calculator {
             //and has its own execution context."            
 
             for (int i = 0; i <= equation.Count - 1; i++) { //equation.Count - 1 because the last one will always be a number or can be ignored
-                if (equation[i] == "/") {
+                if (equation[i] == "/") { //PEDMAS
                     float.TryParse(equation[i - 1], out float num1);
                     if (equation[i - 2] == "-") { num1 *= -1; }
                     //Instead of manually trying to work with negatives
@@ -67,7 +65,7 @@ namespace Calculator {
 
                     equation[i - 1] = Convert.ToString(num1 / num1); //num1 / num2 check (just to remove error)
                     equation.RemoveRange(i, 2);
-                    i -= 2;
+                    i -= 2; //Adjust for the removed characters
                 }
                 else if (equation[i] == "x") {
                     float.TryParse(equation[i - 1], out float num1);
@@ -98,9 +96,9 @@ namespace Calculator {
             //        equation.RemoveRange(1, 2);
             //    }
             //}
-            //return equation[0].ToString();
+            return equation[0].ToString();
 
-            return "";
+            //return "";
         }
 
         public string Divide(string num1, string num2) {
@@ -131,18 +129,13 @@ namespace Calculator {
             return Convert.ToString(num1f - num2f);
         }
 
-        public bool IsSymbolTheLastCharacter(string symbol) {
+        public bool IsLastCharacterASymbol() {
             //Check if some symbol isn't before another
             //Or calculate them regardless (- x - = +)
             //If - x - = + then - / - = +
-            if (numbers.Count > 0) {
-                if (numbers[numbers.Count - 1] == symbol) {
-                    return true; //The symbol is already in the equation
-                }
-            }
-
+            //if numbers.count > 0 there's a number not yet added to the equation and should be added
             if (equation.Count > 0) {
-                if (equation[equation.Count - 1] == symbol) {
+                if (equation[equation.Count - 1] == "x" || equation[equation.Count - 1] == "/" || equation[equation.Count - 1] == "," || equation[equation.Count - 1] == "=") {
                     return true;
                 }
             }            

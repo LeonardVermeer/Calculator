@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Calculator {
     public partial class Form1 : Form {
+
+        private bool isNegative = false, newEquation = false;
+
         public Form1() {
             InitializeComponent();
         }
@@ -66,14 +69,14 @@ namespace Calculator {
         }
 
         private void btnDecimal_Click(object sender, EventArgs e) {
-            if (!calculate.IsSymbolTheLastCharacter(",")) {
+            if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertNumber(',');
                 rtbAnswer.Text += ',';
             } 
         }
 
         private void button13_Click(object sender, EventArgs e) {
-            if (!calculate.IsSymbolTheLastCharacter("+")) {
+            if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("+");
                 rtbAnswer.Text += " + ";
             }
@@ -81,29 +84,33 @@ namespace Calculator {
 
         private void button15_Click(object sender, EventArgs e) {
             //Min man moeilikheid!
-            if (!calculate.IsSymbolTheLastCharacter("-")) {
+            isNegative = true;
+            //Global bool isNegative, at each other symbol reset it.
+            if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("-");
                 rtbAnswer.Text += " - ";
             }
         }
 
         private void button14_Click(object sender, EventArgs e) {
-            if (!calculate.IsSymbolTheLastCharacter("x")) {
+            if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("x");
                 rtbAnswer.Text += " x ";
             }
         }
 
         private void button16_Click(object sender, EventArgs e) {
-            if (!calculate.IsSymbolTheLastCharacter("/")) {
+            if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("/");
                 rtbAnswer.Text += " / ";
             }
         }
 
         private void btnEqual_Click(object sender, EventArgs e) {
-            if (!calculate.IsSymbolTheLastCharacter("=")) {
+            if (!calculate.IsLastCharacterASymbol()) { //IsLasCharacterASymbol will be true since the last digit
+                //wasn't added yet so it needs to be added before you can test this if
                 rtbAnswer.Text += " = " + Convert.ToString(calculate.Calculation());
+                newEquation = true;
             }
         }
 
