@@ -23,7 +23,7 @@ namespace Calculator {
             }
 
             if (isNegative) {
-               number.Insert(0, "-");
+                number.Insert(0, "-");
             }
     
             equation.Add(number);
@@ -51,19 +51,17 @@ namespace Calculator {
             for (int i = 0; i <= equation.Count - 1; i++) { //equation.Count - 1 because the last one will always be a number or can be ignored
                 if (equation[i] == "/") { //PEDMAS
                     float.TryParse(equation[i - 1], out float num1);
-                    if (equation[i - 2] == "-") { num1 *= -1; }
+                    
                     //Instead of manually trying to work with negatives
                     //add the negative to the number and continue as normal
                     //The list would then look like
                     //3 -4 + 2 -5 / -2 + 3 / -6
                     //0  1 2 3 4  5  6 7 8 9 10
 
-                    //float.TryParse(equation[i + 1], out float num2);
-                    if (equation[i + 1] == "-") { 
-                        float.TryParse(equation[i + 2], out float num2);
-                    }
+                    float.TryParse(equation[i + 1], out float num2);
+                    
 
-                    equation[i - 1] = Convert.ToString(num1 / num1); //num1 / num2 check (just to remove error)
+                    equation[i - 1] = Convert.ToString(num1 / num2); //num1 / num2 check (just to remove error)
                     equation.RemoveRange(i, 2);
                     i -= 2; //Adjust for the removed characters
                 }
@@ -135,7 +133,7 @@ namespace Calculator {
             //If - x - = + then - / - = +
             //if numbers.count > 0 there's a number not yet added to the equation and should be added
             if (equation.Count > 0) {
-                if (equation[equation.Count - 1] == "x" || equation[equation.Count - 1] == "/" || equation[equation.Count - 1] == "," || equation[equation.Count - 1] == "=") {
+                if (equation[equation.Count - 1] == "x" || equation[equation.Count - 1] == "/" || equation[equation.Count - 1] == "," /*|| equation[equation.Count - 1] == "="*/) {
                     return true;
                 }
             }            

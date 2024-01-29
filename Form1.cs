@@ -107,8 +107,8 @@ namespace Calculator {
         }
 
         private void btnEqual_Click(object sender, EventArgs e) {
-            if (!calculate.IsLastCharacterASymbol()) { //IsLasCharacterASymbol will be true since the last digit
-                //wasn't added yet so it needs to be added before you can test this if
+            calculate.InsertOperator("=");
+            if (!calculate.IsLastCharacterASymbol()) {
                 rtbAnswer.Text += " = " + Convert.ToString(calculate.Calculation());
                 newEquation = true;
             }
