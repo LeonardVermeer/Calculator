@@ -90,7 +90,7 @@ namespace Calculator {
         }
 
         //public bool IsLastCharacterASymbol() {
-        //    //check if the list number has some value, if it has then it should be added to equation
+        //    //check if the list number has some value, if it has then it should be added to equation 
         //    //else the last element in equation is a symbol
         //    //Or calculate them regardless (- x - = +)
         //    //If - x - = + then - / - = +
