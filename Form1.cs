@@ -10,9 +10,6 @@ using System.Windows.Forms;
 
 namespace Calculator {
     public partial class Form1 : Form {
-
-        private bool isNegative = false, newEquation = false;
-
         public Form1() {
             InitializeComponent();
         }
@@ -69,49 +66,46 @@ namespace Calculator {
         }
 
         private void btnDecimal_Click(object sender, EventArgs e) {
-            if (!calculate.IsLastCharacterASymbol()) {
+            //if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertNumber(',');
                 rtbAnswer.Text += ',';
-            } 
+            //} 
         }
 
         private void button13_Click(object sender, EventArgs e) {
-            if (!calculate.IsLastCharacterASymbol()) {
+            //if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("+");
                 rtbAnswer.Text += " + ";
-            }
+            //}
         }
 
         private void button15_Click(object sender, EventArgs e) {
-            //Min man moeilikheid!
-            isNegative = true;
             //Global bool isNegative, at each other symbol reset it.
-            if (!calculate.IsLastCharacterASymbol()) {
+            //if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("-");
                 rtbAnswer.Text += " - ";
-            }
+            //}
         }
 
         private void button14_Click(object sender, EventArgs e) {
-            if (!calculate.IsLastCharacterASymbol()) {
+            //if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("x");
                 rtbAnswer.Text += " x ";
-            }
+            //}
         }
 
         private void button16_Click(object sender, EventArgs e) {
-            if (!calculate.IsLastCharacterASymbol()) {
+            //if (!calculate.IsLastCharacterASymbol()) {
                 calculate.InsertOperator("/");
                 rtbAnswer.Text += " / ";
-            }
+            //}
         }
 
         private void btnEqual_Click(object sender, EventArgs e) {
             calculate.InsertOperator("=");
-            if (!calculate.IsLastCharacterASymbol()) {
+            //if (!calculate.IsLastCharacterASymbol()) {
                 rtbAnswer.Text += " = " + Convert.ToString(calculate.Calculation());
-                newEquation = true;
-            }
+            //}
         }
 
         private void btnClear_Click(object sender, EventArgs e) {

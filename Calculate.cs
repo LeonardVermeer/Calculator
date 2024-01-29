@@ -15,15 +15,11 @@ namespace Calculator {
             numbers.Add(Convert.ToString(Num));
         }
 
-        private void InsertNumberIntoEquation(bool isNegative = false) {
+        private void InsertNumberIntoEquation() {
             string number = "";
 
             foreach (string num in numbers) {
                 number += num;
-            }
-
-            if (isNegative) {
-                number.Insert(0, "-");
             }
     
             equation.Add(number);
@@ -32,11 +28,10 @@ namespace Calculator {
 
         public void InsertOperator(string Operator) {
             if (Operator == "-") {
-                InsertNumberIntoEquation(true);
-            } else {
-                InsertNumberIntoEquation();
+                numbers.Insert(0, "-");
             }
 
+            InsertNumberIntoEquation();
             equation.Add(Operator);
         }
 
@@ -61,7 +56,7 @@ namespace Calculator {
                     float.TryParse(equation[i + 1], out float num2);
                     
 
-                    equation[i - 1] = Convert.ToString(num1 / num2); //num1 / num2 check (just to remove error)
+                    equation[i - 1] = Convert.ToString(num1 / num2);
                     equation.RemoveRange(i, 2);
                     i -= 2; //Adjust for the removed characters
                 }
@@ -94,52 +89,31 @@ namespace Calculator {
             //        equation.RemoveRange(1, 2);
             //    }
             //}
+
             return equation[0].ToString();
 
             //return "";
         }
 
-        public string Divide(string num1, string num2) {
-            float.TryParse(num1, out float num1f);
-            float.TryParse(num2, out float num2f);
+        //public bool IsLastCharacterASymbol() {
+        //    //check if the list number has some value, if it has then it should be added to equation
+        //    //else the last element in equation is a symbol
+        //    if (numbers.Count > 0) {
+        //        InsertNumberIntoEquation(); //BUG: negative numbers won't reflect / be sent to the next number
+        //        return false;
+        //    } else { return true; }
+        //    //Or calculate them regardless (- x - = +)
+        //    //If - x - = + then - / - = +
 
-            return Convert.ToString(num1f / num2f);
-        }
-        
-        public string Multiply(string num1, string num2) {
-            float.TryParse(num1, out float num1f);
-            float.TryParse(num2, out float num2f);
+        //    //if numbers.count > 0 there's a number not yet added to the equation and should be added
+        //    //if (equation.Count > 0) {
+        //    //    if (equation[equation.Count - 1] == "x" || equation[equation.Count - 1] == "/" || equation[equation.Count - 1] == "," /*|| equation[equation.Count - 1] == "="*/) {
+        //    //        return true;
+        //    //    }
+        //    //}            
 
-            return Convert.ToString(num1f * num2f);
-        }
-        
-        public string Add(string num1, string num2) {
-            float.TryParse(num1, out float num1f);
-            float.TryParse(num2, out float num2f);
-
-            return Convert.ToString(num1f + num2f);
-        }
-        
-        public string Subtract(string num1, string num2) {
-            float.TryParse(num1, out float num1f);
-            float.TryParse(num2, out float num2f);
-
-            return Convert.ToString(num1f - num2f);
-        }
-
-        public bool IsLastCharacterASymbol() {
-            //Check if some symbol isn't before another
-            //Or calculate them regardless (- x - = +)
-            //If - x - = + then - / - = +
-            //if numbers.count > 0 there's a number not yet added to the equation and should be added
-            if (equation.Count > 0) {
-                if (equation[equation.Count - 1] == "x" || equation[equation.Count - 1] == "/" || equation[equation.Count - 1] == "," /*|| equation[equation.Count - 1] == "="*/) {
-                    return true;
-                }
-            }            
-
-            return false;
-        }
+        //    //return false;
+        //}
 
         public void Clear() {
             numbers = new List<String>();
