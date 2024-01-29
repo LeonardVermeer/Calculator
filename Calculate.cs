@@ -28,7 +28,10 @@ namespace Calculator {
 
         public void InsertOperator(string Operator) {
             if (Operator == "-") {
-                numbers.Insert(0, "-");
+                InsertNumberIntoEquation();
+                numbers = new List<string> ();
+                numbers.Insert(0, "-");//can't insert a negative into the number
+                return;  
             }
 
             InsertNumberIntoEquation();
@@ -74,14 +77,15 @@ namespace Calculator {
             ////All / and x calculations are done
             ////Now only + and - are left
 
-            //while (equation.Count > 2) { 
+            //while (equation.Count > 2) {
             //    if (equation[1] == "+") {
             //        float.TryParse(equation[0], out float num1);
             //        float.TryParse(equation[2], out float num2);
 
             //        equation[0] = Convert.ToString(num1 + num2);
             //        equation.RemoveRange(1, 2);
-            //    } else if (equation[1] == "-") {
+            //    }
+            //    else if (equation[1] == "-") {
             //        float.TryParse(equation[0], out float num1);
             //        float.TryParse(equation[2], out float num2);
 
@@ -90,7 +94,25 @@ namespace Calculator {
             //    }
             //}
 
+            for (int i = 0; i  < equation.Count - 1; i++) {
+                if (equation[i] == "+") {
+                    float.TryParse(equation[i - 1], out float num1);
+                    float.TryParse(equation[i + 1], out float num2);
+
+                    equation[i - 1] = Convert.ToString(num1 + num2);
+                    equation.RemoveRange(i, 2);
+                    i -= 2; //Adjust for the removed characters
+                } else if (equation.Count == 3) {
+                    float.TryParse(equation[0], out float num1);
+                    float.TryParse(equation[1], out float num2);
+
+                    equation[0] = Convert.ToString(num1 + num2);//It doesn't matter which number has the negative it will be accounted for
+                    return equation[0].ToString();
+                }
+            }
+
             return equation[0].ToString();
+
 
             //return "";
         }
