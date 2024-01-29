@@ -30,7 +30,7 @@ namespace Calculator {
             if (Operator == "-") {
                 InsertNumberIntoEquation();
                 numbers = new List<string> ();
-                numbers.Insert(0, "-");//can't insert a negative into the number
+                numbers.Insert(0, "-");
                 return;  
             }
 
