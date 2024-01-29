@@ -92,10 +92,6 @@ namespace Calculator {
         //public bool IsLastCharacterASymbol() {
         //    //check if the list number has some value, if it has then it should be added to equation
         //    //else the last element in equation is a symbol
-        //    if (numbers.Count > 0) {
-        //        InsertNumberIntoEquation(); //BUG: negative numbers won't reflect / be sent to the next number
-        //        return false;
-        //    } else { return true; }
         //    //Or calculate them regardless (- x - = +)
         //    //If - x - = + then - / - = +
 
